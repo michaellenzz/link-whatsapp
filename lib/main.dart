@@ -82,6 +82,12 @@ class Home extends StatelessWidget {
     );
   }
 
-  void _launchURL(url) async =>
-      await canLaunch(url) ? await launch(url) : throw 'Erro ao abrir o link';
+  _launchURL(String url) async {
+    try {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } catch (e) {
+      // ignore: avoid_print
+      print(e.toString());
+    }
+  }
 }
